@@ -2,7 +2,7 @@ let capture;
 let posenet;
 let skeleton; 
 let singlePose;
-let img,mask;
+
 function setup()
 {
    createCanvas(1000,800); 
@@ -11,8 +11,6 @@ function setup()
    posenet  = ml5.poseNet(capture, modelLoaded);
    posenet.on('pose',receivedPoses); 
 
-   img = loadImage('images/eye.jpg');
-   mask = loadImage('images/mask.jpg');
 }
 function receivedPoses(poses){
     console.log(poses);
@@ -32,19 +30,16 @@ function draw(){
     if (singlePose)
     {for (let i=0; i<singlePose.keypoints.length;i++)
     {
-        ellipse(singlePose.keypoints[i].position.x,singlePose.keypoints[i].position.y,20,20);
+        ellipse(singlePose.keypoints[i].position.x+80,singlePose.keypoints[i].position.y+70,20,20);
 
     }
     stroke(255,255,255)
     strokeWeight(5)
     for (let j=0; j<skeleton.length;j++)
     {
-        line(skeleton[j][0].position.x,skeleton[j][0].position.y,skeleton[j][1].position.x,skeleton[j][1].position.y);
+        line(skeleton[j][0].position.x+80,skeleton[j][0].position.y+70,skeleton[j][1].position.x+80,skeleton[j][1].position.y+70);
     }
 
-    image(img,singlePose.rightEye.x+78,singlePose.rightEye.y+50,25,25)
-    image(img,singlePose.leftEye.x+100,singlePose.leftEye.y+50,25,25)
-    image(mask,singlePose.nose.x+0,singlePose.nose.y+50,180,180)
 
 }
     
